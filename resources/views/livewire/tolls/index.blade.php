@@ -168,15 +168,18 @@ rules([
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    (function() {
         const byId = (id) => document.getElementById(id);
-        const ok = byId('tollsOk');
-        if (!ok) return;
         const num = (v) => {
             const n = String(v || '').replace(/\D/g, '');
             return n ? parseInt(n, 10) : 0;
         };
-        ok.addEventListener('click', (ev) => {
+
+        // Livewire による動的再描画で OK ボタン要素が差し替わっても動くよう、
+        // ドキュメントにイベント委譲でバインドする
+        document.addEventListener('click', (ev) => {
+            const ok = ev.target && (ev.target.closest ? ev.target.closest('#tollsOk') : null);
+            if (!ok) return;
             try {
                 const data = {
                     skipHighway: !!byId('skipHighway')?.checked,
@@ -192,6 +195,6 @@ rules([
             // 念のためデフォルト遷移の前に保存を完了させる
             ev.preventDefault();
             window.location.href = '/summary.html';
-        });
-    });
+        }, true);
+    })();
 </script>
