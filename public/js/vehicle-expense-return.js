@@ -72,12 +72,18 @@
   updateOk();
 
   okButton.addEventListener('click', () => {
-    const sh = toTwoDigits(startHour.value);
-    const sm = toTwoDigits(startMinute.value);
-    const eh = toTwoDigits(endHour.value);
-    const em = toTwoDigits(endMinute.value);
-    const summary = `車両: ${vehicleName.value}\n開始 ${sh}:${sm} / 終了 ${eh}:${em}\n経路: ${departure.value} → ${arrival.value}`;
-    alert(summary);
+    try {
+      const data = {
+        startHour: String(startHour.value || ''),
+        startMinute: String(startMinute.value || ''),
+        endHour: String(endHour.value || ''),
+        endMinute: String(endMinute.value || ''),
+        departure: String((departure.value || '').trim()),
+        arrival: String((arrival.value || '').trim()),
+      };
+      localStorage.setItem('vehicle_return', JSON.stringify(data));
+    } catch (e) { }
+    window.location.href = '/tolls';
   });
 })();
 

@@ -76,6 +76,15 @@
   }
 
   okButton.addEventListener('click', () => {
+    try {
+      const data = {
+        startHour: String(startHour.value || ''),
+        startMinute: String(startMinute.value || ''),
+        endHour: String(endHour.value || ''),
+        endMinute: String(endMinute.value || ''),
+      };
+      localStorage.setItem('worktime', JSON.stringify(data));
+    } catch (e) { }
     window.location.href = '/vehicle-expense.html';
   });
 })();
