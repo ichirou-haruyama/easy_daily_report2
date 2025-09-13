@@ -67,7 +67,7 @@
                 <h1>作業日報を、もっと簡単に</h1>
                 <p class="subtitle">作業日報をリモート入力</p>
                 <div class="hero-ctas">
-                    <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">日報入力</a>
+                    <a href="{{ route('reports.create') }}" class="btn btn-primary btn-lg">日報入力</a>
                     <a href="#features-intro" class="btn btn-ghost btn-lg">機能を見る</a>
                 </div>
             </div>
