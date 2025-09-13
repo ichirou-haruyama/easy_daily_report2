@@ -60,4 +60,53 @@ if (backToTop) {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// Demo auth: simple email/password check on login.html
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    const AUTH_EMAIL = 'test.user@example.com';
+    const AUTH_PASSWORD = 'Test-1234';
+    const messageEl = document.getElementById('authMessage');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = /** @type {HTMLInputElement} */(document.getElementById('email')).value.trim();
+      const password = /** @type {HTMLInputElement} */(document.getElementById('password')).value;
+
+      if (!email || !password) {
+        if (messageEl) messageEl.textContent = 'メールアドレスとパスワードを入力してください。';
+        return;
+      }
+
+      const isValid = email.toLowerCase() === AUTH_EMAIL && password === AUTH_PASSWORD;
+      if (!isValid) {
+        if (messageEl) messageEl.textContent = 'メールアドレスまたはパスワードが正しくありません。';
+        return;
+      }
+
+      try {
+        sessionStorage.setItem('demo_auth', '1');
+        // デモ名: メールのローカル部を名前化
+        const demoName = 'テストユーザー';
+        sessionStorage.setItem('demo_user_name', demoName);
+      } catch (_) { }
+      window.location.href = 'index.html';
+    });
+  }
+
+  // Show user name on top page
+  const userNameHolder = document.getElementById('userNameText');
+  const userNavItem = document.getElementById('nav-user');
+  const loginLink = document.getElementById('navLoginLink');
+  try {
+    const isAuthed = sessionStorage.getItem('demo_auth') === '1';
+    const savedName = sessionStorage.getItem('demo_user_name');
+    if (isAuthed && userNavItem && userNameHolder) {
+      userNameHolder.textContent = savedName || 'ログインユーザー';
+      userNavItem.style.display = '';
+      if (loginLink) loginLink.style.display = 'none';
+    }
+  } catch (_) { }
+});
+
 
