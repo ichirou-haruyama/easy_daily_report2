@@ -83,7 +83,7 @@ $throttleKey = function (): string {
 
 <section class="auth-card reveal visible">
     <a class="brand auth-brand" href="{{ route('home') }}" aria-label="トップへ" wire:navigate>
-        <img src="/images/login-logo.png" alt="らくラクポチッと日報 ロゴ" class="brand-logo" />
+        <img src="/images/らくらくポチッと日報.png" alt="らくラクポチッと日報 ロゴ" class="brand-logo" />
         <span class="brand-name">らくラクポチッと日報</span>
     </a>
     <h1 class="auth-title">ログイン</h1>

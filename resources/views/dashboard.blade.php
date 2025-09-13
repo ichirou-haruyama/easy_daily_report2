@@ -27,7 +27,7 @@
     <header class="site-header" id="top">
         <div class="container header-inner">
             <a class="brand" href="#top" aria-label="トップへ">
-                <img src="{{ asset('images/らくラク！ポチッと日報.png') }}" alt="らくラクポチッと日報 ロゴ" class="brand-logo" />
+                <img src="{{ asset('images/らくらくポチッと日報.png') }}" alt="らくラクポチッと日報 ロゴ" class="brand-logo" />
                 <span class="brand-name">らくラクポチッと日報</span>
             </a>
 
@@ -41,15 +41,20 @@
                     <li><a href="#features-intro">機能紹介</a></li>
                     <li><a href="#features-list">機能一覧</a></li>
                     <li><a href="#contact">お問い合わせ</a></li>
-                    <li id="nav-user" class="nav-user" style="display:none;"><i class="fa-solid fa-user"
-                            aria-hidden="true"></i> <span id="userNameText"></span></li>
-                    <li><a id="navLoginLink" href="{{ route('login') }}">ログイン</a></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">ログアウト</button>
-                        </form>
-                    </li>
+                    @auth
+                        <li id="nav-user" class="nav-user"><i class="fa-solid fa-user" aria-hidden="true"></i>
+                            <span id="userNameText"></span>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-sm">ログアウト</button>
+                            </form>
+                        </li>
+                    @endauth
+                    @guest
+                        <li><a id="navLoginLink" href="{{ route('login') }}">ログイン</a></li>
+                    @endguest
                 </ul>
             </nav>
         </div>
@@ -62,7 +67,7 @@
                 <h1>作業日報を、もっと簡単に</h1>
                 <p class="subtitle">作業日報をリモート入力</p>
                 <div class="hero-ctas">
-                    <a href="#contact" class="btn btn-primary btn-lg">お問い合わせ</a>
+                    <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">日報入力</a>
                     <a href="#features-intro" class="btn btn-ghost btn-lg">機能を見る</a>
                 </div>
             </div>

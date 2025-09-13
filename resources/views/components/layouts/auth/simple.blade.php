@@ -10,7 +10,7 @@
         <div class="flex w-full max-w-sm flex-col gap-2">
             <a href="{{ route('home') }}" class="flex flex-col items-center gap-2 font-medium" wire:navigate>
                 <span class="flex h-16 w-16 items-center justify-center rounded-md overflow-hidden">
-                    <img src="/images/login-logo.png" alt="らくラクポチッと日報 ロゴ" class="w-16 h-16 object-contain" />
+                    <img src="/images/らくらくポチッと日報.png" alt="らくラクポチッと日報 ロゴ" class="w-16 h-16 object-contain" />
                 </span>
 
                 <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
