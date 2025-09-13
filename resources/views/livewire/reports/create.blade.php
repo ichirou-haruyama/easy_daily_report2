@@ -70,9 +70,9 @@ rules([
                     @endphp
 
                     @if ($canProceed)
-                        <button type="button"
-                            class="inline-flex items-center justify-center rounded-md px-5 py-2 text-sm font-medium text-black shadow-sm transition hover:shadow-md focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                            style="background-color:#9acd32;border:1px solid #9acd32;">OK</button>
+                        <a href="/worktime.html" role="button"
+                            class="inline-flex items-center justify-center rounded-md px-5 py-2 text-sm font-medium text-black shadow-sm transition hover:shadow-md focus-visible:outline-none"
+                            style="background-color:#9acd32;border:1px solid #9acd32;">OK</a>
                     @else
                         <button type="button"
                             class="inline-flex items-center justify-center rounded-md px-5 py-2 text-sm font-medium text-black shadow-sm transition hover:shadow-md focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
