@@ -1,15 +1,5 @@
 (() => {
-  const toTwoDigits = (value) => {
-    const num = Number(value);
-    if (Number.isNaN(num) || num < 0) return "";
-    return num.toString().padStart(2, "0");
-  };
-
-  const clamp = (value, min, max) => {
-    const n = Number(value);
-    if (Number.isNaN(n)) return "";
-    return Math.min(Math.max(n, min), max);
-  };
+  const toTwoDigits = (value) => String(value).padStart(2, "0");
 
   const qs = (sel) => document.querySelector(sel);
   const qsa = (sel) => Array.from(document.querySelectorAll(sel));
@@ -24,26 +14,25 @@
 
   if (!startHour || !startMinute || !endHour || !endMinute || !workContentRow || !workContent || !okButton) return;
 
-  const normalizeInput = (input, min, max) => {
-    input.addEventListener('change', () => {
-      if (input.value === '') return;
-      const clamped = clamp(input.value, min, max);
-      input.value = String(clamped);
-    });
-    input.addEventListener('blur', () => {
-      if (input.value === '') return;
-      input.value = String(clamp(input.value, min, max));
-    });
-    input.addEventListener('input', () => {
-      const cleaned = input.value.replace(/[^0-9]/g, '');
-      if (cleaned !== input.value) input.value = cleaned;
-    });
+  const fillSelect = (select, start, end) => {
+    const frag = document.createDocumentFragment();
+    const empty = document.createElement('option');
+    empty.value = '';
+    empty.textContent = '';
+    frag.appendChild(empty);
+    for (let i = start; i <= end; i++) {
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = toTwoDigits(i);
+      frag.appendChild(opt);
+    }
+    select.appendChild(frag);
   };
 
-  normalizeInput(startHour, 0, 23);
-  normalizeInput(endHour, 0, 23);
-  normalizeInput(startMinute, 0, 59);
-  normalizeInput(endMinute, 0, 59);
+  fillSelect(startHour, 0, 23);
+  fillSelect(endHour, 0, 23);
+  fillSelect(startMinute, 0, 59);
+  fillSelect(endMinute, 0, 59);
 
   const isTimeFilled = () => {
     const sh = startHour.value !== '';
@@ -87,12 +76,7 @@
   }
 
   okButton.addEventListener('click', () => {
-    const sh = toTwoDigits(startHour.value);
-    const sm = toTwoDigits(startMinute.value);
-    const eh = toTwoDigits(endHour.value);
-    const em = toTwoDigits(endMinute.value);
-    const summary = `開始 ${sh}:${sm} / 終了 ${eh}:${em}\n作業内容: ${workContent.value.trim()}`;
-    alert(summary);
+    window.location.href = '/vehicle-expense.html';
   });
 })();
 

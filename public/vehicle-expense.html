@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>労務時間入力 | らくラクポチッと日報</title>
-    <meta name="description" content="労務時間（開始・終了）の入力と作業内容の登録ページ" />
+    <title>車両経費入力（行き） | らくラクポチッと日報</title>
+    <meta name="description" content="車両経費（行き）の入力（車両名、運行時間、移動経路）ページ" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -37,13 +37,18 @@
     </header>
 
     <main>
-        <section class="section" id="worktime-input">
+        <section class="section" id="vehicle-expense-input">
             <div class="container" style="max-width:720px;">
-                <h1 class="section-title">労務時間の入力</h1>
+                <h1 class="section-title">車両経費の入力（行き）</h1>
 
-                <form id="worktimeForm" class="contact-form" action="#" method="post" novalidate>
-                    <fieldset class="form-fieldset" aria-labelledby="start-time-legend">
-                        <legend id="start-time-legend">開始時間</legend>
+                <form id="vehicleExpenseForm" class="contact-form" action="#" method="post" novalidate>
+                    <div class="form-row">
+                        <label for="vehicleName">使用車両名</label>
+                        <input id="vehicleName" name="vehicleName" type="text" placeholder="例：ハイエース1号車" />
+                    </div>
+
+                    <fieldset class="form-fieldset" aria-labelledby="drive-start-legend" style="margin-top:18px;">
+                        <legend id="drive-start-legend">運行開始時間</legend>
                         <div class="form-row" style="display:flex;gap:12px;align-items:center;">
                             <label for="startHour" class="visually-hidden">開始 時</label>
                             <select id="startHour" name="startHour" aria-label="開始 時"></select>
@@ -54,8 +59,8 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="form-fieldset" aria-labelledby="end-time-legend" style="margin-top:18px;">
-                        <legend id="end-time-legend">終了時間</legend>
+                    <fieldset class="form-fieldset" aria-labelledby="drive-end-legend" style="margin-top:18px;">
+                        <legend id="drive-end-legend">運行終了時間</legend>
                         <div class="form-row" style="display:flex;gap:12px;align-items:center;">
                             <label for="endHour" class="visually-hidden">終了 時</label>
                             <select id="endHour" name="endHour" aria-label="終了 時"></select>
@@ -66,14 +71,21 @@
                         </div>
                     </fieldset>
 
-                    <div id="workContentRow" class="form-row" style="margin-top:18px; display:none;">
-                        <label for="workContent">作業内容</label>
-                        <textarea id="workContent" name="workContent" rows="4" placeholder="例：搬入・配線敷設など（4文字以上でOKボタン表示）"></textarea>
-                    </div>
+                    <fieldset class="form-fieldset" aria-labelledby="route-legend" style="margin-top:18px;">
+                        <legend id="route-legend">移動経路</legend>
+                        <div class="form-row">
+                            <label for="departure">出発地</label>
+                            <input id="departure" name="departure" type="text" placeholder="例：本社" />
+                        </div>
+                        <div class="form-row">
+                            <label for="arrival">到着地</label>
+                            <input id="arrival" name="arrival" type="text" placeholder="例：A現場" />
+                        </div>
+                    </fieldset>
 
                     <div class="form-actions" style="display:flex;gap:12px;">
                         <button id="okButton" type="button" class="btn btn-primary" style="display:none;">OK</button>
-                        <a href="/" class="btn btn-ghost">戻る</a>
+                        <a href="/worktime.html" class="btn btn-ghost">戻る</a>
                     </div>
                 </form>
             </div>
@@ -91,7 +103,7 @@
         </div>
     </footer>
 
-    <script src="/js/worktime.js" defer></script>
+    <script src="/js/vehicle-expense.js" defer></script>
 </body>
 
 </html>
