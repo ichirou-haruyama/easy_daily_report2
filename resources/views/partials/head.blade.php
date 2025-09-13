@@ -7,6 +7,10 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+<!-- ブラウザUIのテーマカラーをアクセント色に設定 -->
+<meta name="theme-color" content="#9acd32" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#9acd32" media="(prefers-color-scheme: dark)">
+
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 

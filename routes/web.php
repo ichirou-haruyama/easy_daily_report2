@@ -25,6 +25,9 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
     Volt::route('settings/password', 'settings.password')->name('password.edit');
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
+
+    // 日報入力ページ（認証必須）
+    Volt::route('reports/create', 'reports.create')->name('reports.create');
 });
 
 require __DIR__ . '/auth.php';

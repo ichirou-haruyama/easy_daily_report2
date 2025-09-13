@@ -5,15 +5,16 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800">
-    <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+<body class="min-h-screen bg-white dark:bg-zinc-900">
+    <flux:sidebar sticky stashable
+        class="border-e border-zinc-200/50 bg-white/80 backdrop-blur-md dark:border-zinc-700/50 dark:bg-zinc-900/80">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
             <x-app-logo />
         </a>
 
-        <flux:navlist variant="outline">
+        <flux:navlist variant="outline" class="[--accent:#9acd32] [--accent-foreground:#0a0a0a]">
             <flux:navlist.group :heading="__('Platform')" class="grid">
                 <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
@@ -22,7 +23,7 @@
 
         <flux:spacer />
 
-        <flux:navlist variant="outline">
+        <flux:navlist variant="outline" class="[--accent:#9acd32] [--accent-foreground:#0a0a0a]">
             <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
                 target="_blank">
                 {{ __('Repository') }}

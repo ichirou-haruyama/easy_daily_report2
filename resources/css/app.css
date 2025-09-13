@@ -23,16 +23,20 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
-    --color-accent-foreground: var(--color-white);
+    /* アクセントカラーをイエローグリーンに統一 */
+    --color-accent: #9acd32;
+    --color-accent-content: #9acd32;
+    /* リングオフセットなど背景に用いる前景色（ライトモード） */
+    --color-accent-foreground: #0a0a0a;
 }
 
 @layer theme {
     .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
+        /* ダークモードでもアクセントは統一 */
+        --color-accent: #9acd32;
+        --color-accent-content: #9acd32;
+        /* ダーク背景に馴染むリングオフセット色 */
+        --color-accent-foreground: var(--color-zinc-900);
     }
 }
 
@@ -45,6 +49,23 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
+    /* ベースフォントサイズを2倍に拡大 */
+    html {
+        font-size: 200%;
+    }
+
+    /* タイポグラフィの視認性向上 */
+    body {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* テキスト選択時のアクセント */
+    ::selection {
+        background: #9acd32;
+        color: #0a0a0a;
+    }
 }
 
 [data-flux-field]:not(ui-radio, ui-checkbox) {
@@ -52,7 +73,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],

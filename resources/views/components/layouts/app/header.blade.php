@@ -5,8 +5,9 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800">
-    <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+<body class="min-h-screen bg-white dark:bg-zinc-900">
+    <flux:header container
+        class="border-b border-zinc-200/50 bg-white/80 backdrop-blur-md dark:border-zinc-700/50 dark:bg-zinc-900/80">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
         <a href="{{ route('dashboard') }}" class="ms-2 me-5 flex items-center space-x-2 rtl:space-x-reverse lg:ms-0"
@@ -14,7 +15,7 @@
             <x-app-logo />
         </a>
 
-        <flux:navbar class="-mb-px max-lg:hidden">
+        <flux:navbar class="-mb-px max-lg:hidden text-zinc-800 dark:text-zinc-100">
             <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                 wire:navigate>
                 {{ __('Dashboard') }}
@@ -23,7 +24,7 @@
 
         <flux:spacer />
 
-        <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0!">
+        <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0! text-zinc-800 dark:text-zinc-100">
             <flux:tooltip :content="__('Search')" position="bottom">
                 <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#"
                     :label="__('Search')" />
@@ -42,8 +43,9 @@
         @auth
             <form method="POST" action="{{ route('logout') }}" class="hidden lg:block me-2">
                 @csrf
-                <button type="submit" class="inline-block px-5 py-1.5 rounded-sm text-sm leading-normal text-white"
-                    style="background-color:#F53003;border:1px solid #F53003;" data-test="logout-button">
+                <button type="submit"
+                    class="inline-block px-5 py-1.5 rounded-sm text-sm leading-normal text-black shadow-sm"
+                    style="background-color:#9acd32;border:1px solid #9acd32;" data-test="logout-button">
                     ログアウト
                 </button>
             </form>
