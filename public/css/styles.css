@@ -136,6 +136,17 @@ a {
     box-shadow: var(--shadow-md);
 }
 
+.btn-accent {
+    background: #e67e22;
+    color: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-accent:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
 .btn-ghost {
     background: transparent;
     color: var(--brand-blue);
@@ -328,6 +339,21 @@ a {
 
 .form-row label {
     font-weight: 600;
+}
+
+.inline-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.inline-checkbox input[type="checkbox"] {
+    width: 28px;
+    /* 既定サイズの約2倍に拡大 */
+    height: 28px;
+    vertical-align: middle;
+    /* テキストと同じ高さに配置 */
 }
 
 .form-row input,
