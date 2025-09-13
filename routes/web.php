@@ -28,6 +28,10 @@ Route::middleware(['auth'])->group(function () {
 
     // 日報入力ページ（認証必須）
     Volt::route('reports/create', 'reports.create')->name('reports.create');
+    Volt::route('reports/confirm', 'reports.confirm')->name('reports.confirm');
+
+    // 高速料金入力ページ（認証必須）
+    Volt::route('tolls', 'tolls.index')->name('tolls.index');
 });
 
 require __DIR__ . '/auth.php';

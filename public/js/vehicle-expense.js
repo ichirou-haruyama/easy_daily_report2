@@ -73,6 +73,17 @@
   updateOk();
 
   okButton.addEventListener('click', () => {
+    try {
+      const data = {
+        startHour: String(startHour.value || ''),
+        startMinute: String(startMinute.value || ''),
+        endHour: String(endHour.value || ''),
+        endMinute: String(endMinute.value || ''),
+        departure: String((departure.value || '').trim()),
+        arrival: String((arrival.value || '').trim()),
+      };
+      localStorage.setItem('vehicle_go', JSON.stringify(data));
+    } catch (e) { }
     window.location.href = '/vehicle-expense-return.html';
   });
 })();
