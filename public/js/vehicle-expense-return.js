@@ -7,6 +7,7 @@
   if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
 
   const vehicleName = qs('#vehicleName');
+  const noCompanyCar = qs('#noCompanyCar');
   const startHour = qs('#startHour');
   const startMinute = qs('#startMinute');
   const endHour = qs('#endHour');
@@ -15,7 +16,7 @@
   const arrival = qs('#arrival');
   const okButton = qs('#okButton');
 
-  if (!vehicleName || !startHour || !startMinute || !endHour || !endMinute || !departure || !arrival || !okButton) {
+  if (!vehicleName || !startHour || !startMinute || !endHour || !endMinute || !departure || !arrival || !okButton || !noCompanyCar) {
     return;
   }
 
@@ -39,7 +40,7 @@
   fillSelect(startMinute, 0, 59);
   fillSelect(endMinute, 0, 59);
 
-  const isFilled = () => {
+  const isAllFilled = () => {
     const v = (vehicleName.value || '').trim().length > 0;
     const sh = startHour.value !== '';
     const sm = startMinute.value !== '';
@@ -51,10 +52,18 @@
   };
 
   const updateOk = () => {
-    okButton.style.display = isFilled() ? '' : 'none';
+    const allow = noCompanyCar.checked ? true : isAllFilled();
+    okButton.style.display = allow ? '' : 'none';
+    if (noCompanyCar.checked) {
+      okButton.classList.remove('btn-primary');
+      okButton.classList.add('btn-accent');
+    } else {
+      okButton.classList.add('btn-primary');
+      okButton.classList.remove('btn-accent');
+    }
   };
 
-  [vehicleName, startHour, startMinute, endHour, endMinute, departure, arrival].forEach((el) => {
+  [vehicleName, startHour, startMinute, endHour, endMinute, departure, arrival, noCompanyCar].forEach((el) => {
     el.addEventListener('input', updateOk);
     el.addEventListener('change', updateOk);
     el.addEventListener('blur', updateOk);
