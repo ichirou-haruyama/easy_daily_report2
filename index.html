@@ -62,9 +62,9 @@
 
     <!-- Features Intro (icons + short text) -->
     <section class="section" id="features-intro">
-        <div class="container">
+        <div class="container" style="display:grid;place-items:center">
             <h2 class="section-title reveal">すぐに使える主要機能</h2>
-            <div class="features-grid">
+            <div class="features-grid" style="width:min(1120px,92%);">
                 <div class="feature-item reveal">
                     <div class="feature-icon"><i class="fa-solid fa-id-card" aria-hidden="true"></i></div>
                     <h3 class="feature-title">ID検索</h3>
@@ -91,8 +91,10 @@
                     <p class="feature-desc">QRから協力会社も簡単入力。</p>
                 </div>
                 <div class="feature-item reveal">
-                    <div class="feature-icon"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></div>
-                    <h3 class="feature-title">その他</h3>
+                    <a href="/admin" class="feature-link" aria-label="管理画面へ">
+                        <div class="feature-icon"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></div>
+                        <h3 class="feature-title">その他</h3>
+                    </a>
                     <p class="feature-desc">必要な拡張機能を順次追加予定。</p>
                 </div>
             </div>
@@ -103,7 +105,7 @@
     <section class="section section-alt" id="features-list">
         <div class="container">
             <h2 class="section-title reveal">現場業務を支える充実の機能</h2>
-            <div class="cards">
+            <div class="cards" style="width:min(1120px,92%);margin:0 auto;">
                 <article class="card reveal">
                     <div class="card-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
                     <h3 class="card-title">現場情報の一元管理</h3>

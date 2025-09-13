@@ -4,8 +4,16 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 })->name('home');
+
+// 管理ID入力ページ（誰でもアクセス可）
+Volt::route('admin', 'admin.id')->name('admin.id');
+
+// 管理画面（管理ID認証が必要）
+Route::middleware(['management'])->group(function () {
+    Volt::route('management', 'admin.dashboard')->name('management.dashboard');
+});
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -19,4 +27,4 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

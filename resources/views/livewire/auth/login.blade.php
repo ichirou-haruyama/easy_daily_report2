@@ -10,9 +10,9 @@ use Illuminate\Validation\ValidationException;
 use function Livewire\Volt\{layout, state, rules};
 
 /**
- * ログイン画面（Volt Functionalスタイル）
+ * ログイン画面（Volt Functionalスタイル／marketingレイアウト）
  */
-layout('components.layouts.auth');
+layout('components.layouts.auth.marketing');
 
 // 状態管理
 state([
@@ -47,7 +47,8 @@ $login = function (): void {
     RateLimiter::clear($this->throttleKey());
     Session::regenerate();
 
-    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+    // ログイン成功後はLaravelのダッシュボードへリダイレクト
+    $this->redirectIntended(default: route('dashboard'), navigate: false);
 };
 
 /**
@@ -80,43 +81,50 @@ $throttleKey = function (): string {
 };
 ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
+<section class="auth-card reveal visible">
+    <a class="brand auth-brand" href="{{ route('home') }}" aria-label="トップへ" wire:navigate>
+        <img src="/images/login-logo.png" alt="らくラクポチッと日報 ロゴ" class="brand-logo" />
+        <span class="brand-name">らくラクポチッと日報</span>
+    </a>
+    <h1 class="auth-title">ログイン</h1>
+    <p class="auth-subtitle">ログインIDはメールアドレス、パスワードは管理部発行のものをご利用ください。</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    <!-- セッション・ステータスメッセージ -->
+    @if (session('status'))
+        <p class="auth-message" role="alert" aria-live="polite">{{ session('status') }}</p>
+    @endif
 
-    <form method="POST" wire:submit="login" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input wire:model="email" :label="__('Email address')" type="email" required autofocus autocomplete="email"
-            placeholder="email@example.com" />
-
-        <!-- Password -->
-        <div class="relative">
-            <flux:input wire:model="password" :label="__('Password')" type="password" required
-                autocomplete="current-password" :placeholder="__('Password')" viewable />
-
-            @if (Route::has('password.request'))
-                <flux:link class="absolute end-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </flux:link>
-            @endif
+    <form id="loginForm" class="auth-form" wire:submit="login" novalidate>
+        <div class="form-row">
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" placeholder="example@company.jp" required
+                wire:model="email" autocomplete="email" />
+            @error('email')
+                <p class="auth-message" role="alert">{{ $message }}</p>
+            @enderror
+        </div>
+        <div class="form-row">
+            <label for="password">パスワード</label>
+            <input id="password" name="password" type="password" placeholder="管理部から発行されたパスワード" required
+                wire:model="password" autocomplete="current-password" />
+            @error('password')
+                <p class="auth-message" role="alert">{{ $message }}</p>
+            @enderror
         </div>
 
-        <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
-
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
-                {{ __('Log in') }}
-            </flux:button>
+        <div class="auth-actions">
+            <button type="submit" class="btn btn-primary btn-lg auth-submit">
+                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                ログイン
+            </button>
         </div>
     </form>
 
-    @if (Route::has('register'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-            <span>{{ __('Don\'t have an account?') }}</span>
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-        </div>
-    @endif
-</div>
+    <div class="auth-note">
+        <h2>テスト用アカウント</h2>
+        <ul>
+            <li><strong>メール</strong>：test@example.com</li>
+            <li><strong>パスワード</strong>：password</li>
+        </ul>
+    </div>
+</section>

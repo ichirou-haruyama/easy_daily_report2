@@ -61,6 +61,7 @@ const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Demo auth: simple email/password check on login.html
+// (Not used by Laravel form, but harmless if included.)
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
@@ -69,28 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageEl = document.getElementById('authMessage');
 
     loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = /** @type {HTMLInputElement} */(document.getElementById('email')).value.trim();
-      const password = /** @type {HTMLInputElement} */(document.getElementById('password')).value;
-
-      if (!email || !password) {
-        if (messageEl) messageEl.textContent = 'メールアドレスとパスワードを入力してください。';
-        return;
-      }
-
-      const isValid = email.toLowerCase() === AUTH_EMAIL && password === AUTH_PASSWORD;
-      if (!isValid) {
-        if (messageEl) messageEl.textContent = 'メールアドレスまたはパスワードが正しくありません。';
-        return;
-      }
-
-      try {
-        sessionStorage.setItem('demo_auth', '1');
-        // デモ名: Laravelの初期ユーザー名に合わせる
-        const demoName = 'Test User';
-        sessionStorage.setItem('demo_user_name', demoName);
-      } catch (_) { }
-      window.location.href = 'index.html';
+      // Laravel handles submission; this block is for static demo only.
+      // Do nothing here to avoid interfering with Livewire.
     });
   }
 
@@ -108,5 +89,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (_) { }
 });
-
-
